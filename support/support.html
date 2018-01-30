@@ -1,0 +1,61 @@
+<div id="adjmail" class="page-layout carded left-sidenav" layout="column" ng-switch="vm.appInnerState">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg h-50"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <div class="center pos-rel" layout="column" flex>
+        <!-- CONTENT CARD -->
+        <div class="content-card mt-45" layout="column" flex>
+            <div class="content-wrapper p-16" layout="column" layout-align="center center" flex ms-scroll>
+                <form id="supportForm" name="vm.supportForm" ng-submit="submitTicket()" style="width: 500px;" flex layout="column" layout-align="center center">
+                    <md-input-container fill-width>
+                        <label>Summary</label>
+                        <input ng-disabled="submitOnProcess" type="text" ng-model="support.summary" ng-required name="supportSummary">
+                    </md-input-container>
+                    <div layout="row" layout-align="center center">
+                        <md-button ng-disabled="submitOnProcess" type="submit" class="md-raised md-accent">Submit</md-button>
+                    </div>
+                </form>
+
+                <div layout="column" layout-align="start start" flex fill-width>
+                    <div flex class="list-offset sub-list" fill-width>
+                        <div class="list-header" layout="row" flex>
+                            <div flex>Issue</div>
+                            <div flex>Added by</div>
+                            <div flex>Created date</div>
+                            <div flex="20">Status</div>
+                        </div>
+                        <md-content class="list-content pos-rel" ms-scroll style="min-height: 250px;max-height: 250px;">
+                            <div layout="row" layout-align="center center" class="msg-empty-list" ng-if="emptyTickets">
+                                <span><md-icon md-font-icon="icon-information-outline"></md-icon> You have not raised any issues yet</span>
+                            </div>
+                            <div class="preloader" ng-if="loadingTickets" flex>
+                                <md-progress-circular></md-progress-circular>
+                            </div>
+                            <div layout="row" flex class="list-item" ng-repeat="ticket in addedTickets" ng-hide="emptyTickets">
+                                <div flex>
+                                    <span>{{ticket.description}}</span>
+                                </div>
+                                <div flex>
+                                    <span>{{ticket.requester.name}}</span>
+                                </div>
+                                <div flex>
+                                    <span>{{ticket.created_at | date:'dd-mm-yyyy'}}</span>
+                                </div>
+                                <div flex="20">
+                                    <span>{{ticket.status}}</span>
+                                </div>
+                            </div>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / CONTENT WRAPPER -->
+    </div>
+    <!-- / CONTENT CARD -->
+
+</div>
+
+
